@@ -15,35 +15,6 @@
             color: #2c1810;
         }
         
-        .navigation {
-            max-width: 1000px;
-            margin: 0 auto 20px;
-            background-color: #2c3e50;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .nav-button {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-            font-family: inherit;
-            font-size: 14px;
-        }
-        
-        .nav-button:hover {
-            background-color: #2980b9;
-        }
-        
-        .nav-button.active {
-            background-color: #e74c3c;
-        }
-        
         .controls {
             max-width: 1000px;
             margin: 0 auto 20px;
@@ -51,22 +22,29 @@
             padding: 15px;
             border-radius: 5px;
             border: 2px solid #666;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
         }
         
         .controls h3 {
-            margin-top: 0;
+            margin: 0;
             color: #333;
+            width: 100%;
+            margin-bottom: 10px;
         }
         
         .controls button {
             background-color: #4CAF50;
             color: white;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-right: 10px;
             font-family: inherit;
+            font-size: 13px;
+            flex-shrink: 0;
         }
         
         .controls button:hover {
@@ -193,56 +171,45 @@
             background-color: white;
         }
         
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
         .table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
-            font-size: 13px;
-            table-layout: fixed;
+            margin: 0;
+            font-size: 12px;
+            min-width: 800px;
         }
         
         .table th, .table td {
             border: 1px solid #8b4513;
-            padding: 6px;
+            padding: 4px;
             text-align: left;
+            vertical-align: top;
         }
         
         .table th {
             background-color: #f0f0f0;
             font-weight: bold;
+            font-size: 11px;
         }
         
         .table td.editable-cell {
             background-color: #ffffcc;
             cursor: text;
-            min-width: 60px;
+            min-width: 40px;
         }
-        
-        /* Largeurs de colonnes pour inventaire médical */
-        #inventoryTable th:nth-child(1) { width: 20%; }
-        #inventoryTable th:nth-child(2) { width: 10%; }
-        #inventoryTable th:nth-child(3) { width: 10%; }
-        #inventoryTable th:nth-child(4) { width: 8%; }
-        #inventoryTable th:nth-child(5) { width: 10%; }
-        #inventoryTable th:nth-child(6) { width: 15%; }
-        #inventoryTable th:nth-child(7) { width: 20%; }
-        #inventoryTable th:nth-child(8) { width: 7%; }
-        
-        /* Largeurs de colonnes pour équipement chirurgical */
-        #equipmentTable th:nth-child(1) { width: 25%; }
-        #equipmentTable th:nth-child(2) { width: 15%; }
-        #equipmentTable th:nth-child(3) { width: 15%; }
-        #equipmentTable th:nth-child(4) { width: 15%; }
-        #equipmentTable th:nth-child(5) { width: 20%; }
-        #equipmentTable th:nth-child(6) { width: 10%; }
         
         .status-select, .condition-select {
             width: 100%;
-            padding: 4px;
+            padding: 2px;
             border: 1px solid #8b4513;
             background-color: #ffffcc;
             font-family: inherit;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             box-sizing: border-box;
         }
@@ -328,6 +295,24 @@
         }
         
         @media print {
+            /* Masquer seulement les contrôles, garder tout le reste identique */
+            .controls {
+                display: none !important;
+            }
+            
+            .delete-btn {
+                display: none !important;
+            }
+            
+            .table th:nth-child(8), .table td:nth-child(8) {
+                display: none !important;
+            }
+            
+            #equipmentTable th:nth-child(6), #equipmentTable td:nth-child(6) {
+                display: none !important;
+            }
+            
+            /* Juste ajuster la taille pour A4 */
             @page {
                 size: A4;
                 margin: 15mm;
@@ -335,110 +320,14 @@
             
             body {
                 font-size: 11px;
-                background-color: white;
-                padding: 0;
-                margin: 0;
-            }
-            
-            .controls {
-                display: none !important;
             }
             
             .document {
-                max-width: none;
-                width: 100%;
-                margin: 0;
-                padding: 10px;
-                border: 2px solid #8b4513;
-                box-shadow: none;
-                background-color: white;
-            }
-            
-            .header {
-                padding-bottom: 10px;
-                margin-bottom: 15px;
-            }
-            
-            .medical-seal {
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
-                margin-bottom: 5px;
-            }
-            
-            .title {
-                font-size: 16px;
-                margin-bottom: 5px;
-            }
-            
-            .subtitle {
-                font-size: 12px;
-                margin-bottom: 3px;
-            }
-            
-            .medical-emblem {
-                font-size: 10px;
-                padding: 2px 8px;
-            }
-            
-            .medical-priority {
-                padding: 5px;
-                margin: 10px 0;
-                font-size: 11px;
+                padding: 15px;
             }
             
             .table {
-                font-size: 9px;
-                margin: 10px 0;
-            }
-            
-            .table th, .table td {
-                padding: 3px;
-                border: 1px solid #8b4513;
-            }
-            
-            .form-row {
-                margin: 5px 0;
                 font-size: 10px;
-            }
-            
-            .status-critical, .status-warning {
-                padding: 5px;
-                margin: 8px 0;
-                font-size: 9px;
-                break-inside: avoid;
-            }
-            
-            .signature-area {
-                margin-top: 15px;
-                padding-top: 10px;
-                font-size: 10px;
-            }
-            
-            .signature-box {
-                height: 20px;
-                width: 150px;
-            }
-            
-            .editable, .form-field, .editable-cell {
-                background-color: transparent !important;
-                border: none !important;
-                padding: 0 !important;
-            }
-            
-            .delete-btn, .add-row-btn {
-                display: none !important;
-            }
-            
-            #inventoryTable th:nth-child(8), #inventoryTable td:nth-child(8),
-            #equipmentTable th:nth-child(6), #equipmentTable td:nth-child(6) {
-                display: none !important;
-            }
-            
-            textarea.editable {
-                min-height: 30px;
-                height: auto;
-                overflow: hidden;
             }
         }
     </style>
@@ -446,10 +335,10 @@
 <body>
     <div class="controls">
         <h3>🔧 Outils de gestion</h3>
-        <button class="print-btn" onclick="printToPDF()">📄 Imprimer en PDF</button>
-        <button class="add-row-btn" onclick="addInventoryRow()">➕ Ajouter matériel médical</button>
-        <button class="add-row-btn" onclick="addEquipmentRow()">➕ Ajouter équipement</button>
-        <button class="reset-btn" onclick="resetAll()">🔄 Reset tout</button>
+        <button class="print-btn" onclick="printToPDF()">📄 PDF</button>
+        <button class="add-row-btn" onclick="addInventoryRow()">➕ Matériel</button>
+        <button class="add-row-btn" onclick="addEquipmentRow()">➕ Équipement</button>
+        <button class="reset-btn" onclick="resetAll()">🔄 Reset</button>
     </div>
 
     <div class="document" id="inventory">
@@ -479,40 +368,225 @@
             🚨 ÉTAT CRITIQUE DES STOCKS PRIORITAIRES 🚨
         </div>
 
-        <table class="table" id="inventoryTable">
-            <thead>
-                <tr>
-                    <th>MATÉRIEL MÉDICAL</th>
-                    <th>STOCK ACTUEL</th>
-                    <th>STOCK MINIMUM</th>
-                    <th>CONSO/J</th>
-                    <th>AUTONOMIE</th>
-                    <th>STATUT</th>
-                    <th>OBSERVATIONS</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong><span class="editable-cell" contenteditable="true">Morphine (ampoules)</span></strong></td>
-                    <td class="editable-cell" contenteditable="true">47</td>
-                    <td class="editable-cell" contenteditable="true">100</td>
-                    <td class="editable-cell" contenteditable="true">15</td>
-                    <td class="editable-cell" contenteditable="true">3.1 jours</td>
-                    <td>
-                        <select class="status-select status-critique" onchange="updateStatusColor(this)">
-                            <option value="bon" class="status-bon">🟢 BON</option>
-                            <option value="faible" class="status-faible">🟡 FAIBLE</option>
-                            <option value="urgent" class="status-urgent">🟠 URGENT</option>
-                            <option value="critique" class="status-critique" selected>🔴 CRITIQUE</option>
-                            <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
-                        </select>
-                    </td>
-                    <td class="editable-cell" contenteditable="true">Rationnement en cours</td>
-                    <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table class="table" id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>MATÉRIEL MÉDICAL</th>
+                        <th>STOCK ACTUEL</th>
+                        <th>STOCK MINIMUM</th>
+                        <th>CONSO/J</th>
+                        <th>AUTONOMIE</th>
+                        <th>STATUT</th>
+                        <th>OBSERVATIONS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong><span class="editable-cell" contenteditable="true">Morphine (ampoules)</span></strong></td>
+                        <td class="editable-cell" contenteditable="true">47</td>
+                        <td class="editable-cell" contenteditable="true">100</td>
+                        <td class="editable-cell" contenteditable="true">15</td>
+                        <td class="editable-cell" contenteditable="true">3.1 jours</td>
+                        <td>
+                            <select class="status-select status-critique" onchange="updateStatusColor(this)">
+                                <option value="bon" class="status-bon">🟢 BON</option>
+                                <option value="faible" class="status-faible">🟡 FAIBLE</option>
+                                <option value="urgent" class="status-urgent">🟠 URGENT</option>
+                                <option value="critique" class="status-critique" selected>🔴 CRITIQUE</option>
+                                <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
+                            </select>
+                        </td>
+                        <td class="editable-cell" contenteditable="true">Rationnement en cours</td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong><span class="editable-cell" contenteditable="true">Plasma sanguin (unités)</span></strong></td>
+                        <td class="editable-cell" contenteditable="true">23</td>
+                        <td class="editable-cell" contenteditable="true">50</td>
+                        <td class="editable-cell" contenteditable="true">8</td>
+                        <td class="editable-cell" contenteditable="true">2.9 jours</td>
+                        <td>
+                            <select class="status-select status-critique" onchange="updateStatusColor(this)">
+                                <option value="bon" class="status-bon">🟢 BON</option>
+                                <option value="faible" class="status-faible">🟡 FAIBLE</option>
+                                <option value="urgent" class="status-urgent">🟠 URGENT</option>
+                                <option value="critique" class="status-critique" selected>🔴 CRITIQUE</option>
+                                <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
+                            </select>
+                        </td>
+                        <td class="editable-cell" contenteditable="true">Urgence absolue</td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong><span class="editable-cell" contenteditable="true">Pansements stériles</span></strong></td>
+                        <td class="editable-cell" contenteditable="true">156</td>
+                        <td class="editable-cell" contenteditable="true">200</td>
+                        <td class="editable-cell" contenteditable="true">25</td>
+                        <td class="editable-cell" contenteditable="true">6.2 jours</td>
+                        <td>
+                            <select class="status-select status-faible" onchange="updateStatusColor(this)">
+                                <option value="bon" class="status-bon">🟢 BON</option>
+                                <option value="faible" class="status-faible" selected>🟡 FAIBLE</option>
+                                <option value="urgent" class="status-urgent">🟠 URGENT</option>
+                                <option value="critique" class="status-critique">🔴 CRITIQUE</option>
+                                <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
+                            </select>
+                        </td>
+                        <td class="editable-cell" contenteditable="true">Réapprovisionnement requis</td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong><span class="editable-cell" contenteditable="true">Pénicilline (doses)</span></strong></td>
+                        <td class="editable-cell" contenteditable="true">89</td>
+                        <td class="editable-cell" contenteditable="true">75</td>
+                        <td class="editable-cell" contenteditable="true">12</td>
+                        <td class="editable-cell" contenteditable="true">7.4 jours</td>
+                        <td>
+                            <select class="status-select status-bon" onchange="updateStatusColor(this)">
+                                <option value="bon" class="status-bon" selected>🟢 BON</option>
+                                <option value="faible" class="status-faible">🟡 FAIBLE</option>
+                                <option value="urgent" class="status-urgent">🟠 URGENT</option>
+                                <option value="critique" class="status-critique">🔴 CRITIQUE</option>
+                                <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
+                            </select>
+                        </td>
+                        <td class="editable-cell" contenteditable="true">Stock satisfaisant</td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong><span class="editable-cell" contenteditable="true">Éther (bouteilles)</span></strong></td>
+                        <td class="editable-cell" contenteditable="true">3</td>
+                        <td class="editable-cell" contenteditable="true">10</td>
+                        <td class="editable-cell" contenteditable="true">2</td>
+                        <td class="editable-cell" contenteditable="true">1.5 jours</td>
+                        <td>
+                            <select class="status-select status-critique" onchange="updateStatusColor(this)">
+                                <option value="bon" class="status-bon">🟢 BON</option>
+                                <option value="faible" class="status-faible">🟡 FAIBLE</option>
+                                <option value="urgent" class="status-urgent">🟠 URGENT</option>
+                                <option value="critique" class="status-critique" selected>🔴 CRITIQUE</option>
+                                <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
+                            </select>
+                        </td>
+                        <td class="editable-cell" contenteditable="true">Chirurgies limitées</td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong><span class="editable-cell" contenteditable="true">Sulfa (comprimés)</span></strong></td>
+                        <td class="editable-cell" contenteditable="true">234</td>
+                        <td class="editable-cell" contenteditable="true">150</td>
+                        <td class="editable-cell" contenteditable="true">18</td>
+                        <td class="editable-cell" contenteditable="true">13 jours</td>
+                        <td>
+                            <select class="status-select status-bon" onchange="updateStatusColor(this)">
+                                <option value="bon" class="status-bon" selected>🟢 BON</option>
+                                <option value="faible" class="status-faible">🟡 FAIBLE</option>
+                                <option value="urgent" class="status-urgent">🟠 URGENT</option>
+                                <option value="critique" class="status-critique">🔴 CRITIQUE</option>
+                                <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
+                            </select>
+                        </td>
+                        <td class="editable-cell" contenteditable="true">-</td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="status-critical">
+            <strong>🚨 ALERTES CRITIQUES:</strong><br>
+            <textarea class="editable" id="critical-alerts" placeholder="Alertes critiques...">• MORPHINE: Stock critique - 3 jours d'autonomie
+• PLASMA: Épuisement imminent - patients hémorragiques en danger
+• ÉTHER: Interventions chirurgicales suspendues dès demain
+• Demande de réapprovisionnement d'urgence transmise</textarea>
+        </div>
+
+        <div style="margin: 25px 0;">
+            <strong>ÉQUIPEMENT CHIRURGICAL:</strong>
+        </div>
+
+        <div class="table-container">
+            <table class="table" id="equipmentTable">
+                <thead>
+                    <tr>
+                        <th>INSTRUMENT</th>
+                        <th>DISPONIBLE</th>
+                        <th>EN RÉPARATION</th>
+                        <th>PERDU/DÉTRUIT</th>
+                        <th>ÉTAT GÉNÉRAL</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="editable-cell" contenteditable="true">Scalpels</span></td>
+                        <td class="editable-cell" contenteditable="true">12</td>
+                        <td class="editable-cell" contenteditable="true">2</td>
+                        <td class="editable-cell" contenteditable="true">3</td>
+                        <td>
+                            <select class="condition-select condition-satisfaisant" onchange="updateConditionColor(this)">
+                                <option value="excellent" class="condition-excellent">🟢 EXCELLENT</option>
+                                <option value="bon" class="condition-bon">🔵 BON</option>
+                                <option value="satisfaisant" class="condition-satisfaisant" selected>🟡 SATISFAISANT</option>
+                                <option value="defaillant" class="condition-defaillant">🔴 DÉFAILLANT</option>
+                                <option value="hors-service" class="condition-hors-service">⚫ HORS SERVICE</option>
+                            </select>
+                        </td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                    <tr>
+                        <td><span class="editable-cell" contenteditable="true">Pinces hémostatiques</span></td>
+                        <td class="editable-cell" contenteditable="true">18</td>
+                        <td class="editable-cell" contenteditable="true">1</td>
+                        <td class="editable-cell" contenteditable="true">5</td>
+                        <td>
+                            <select class="condition-select condition-bon" onchange="updateConditionColor(this)">
+                                <option value="excellent" class="condition-excellent">🟢 EXCELLENT</option>
+                                <option value="bon" class="condition-bon" selected>🔵 BON</option>
+                                <option value="satisfaisant" class="condition-satisfaisant">🟡 SATISFAISANT</option>
+                                <option value="defaillant" class="condition-defaillant">🔴 DÉFAILLANT</option>
+                                <option value="hors-service" class="condition-hors-service">⚫ HORS SERVICE</option>
+                            </select>
+                        </td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                    <tr>
+                        <td><span class="editable-cell" contenteditable="true">Stéthoscopes</span></td>
+                        <td class="editable-cell" contenteditable="true">4</td>
+                        <td class="editable-cell" contenteditable="true">1</td>
+                        <td class="editable-cell" contenteditable="true">1</td>
+                        <td>
+                            <select class="condition-select condition-defaillant" onchange="updateConditionColor(this)">
+                                <option value="excellent" class="condition-excellent">🟢 EXCELLENT</option>
+                                <option value="bon" class="condition-bon">🔵 BON</option>
+                                <option value="satisfaisant" class="condition-satisfaisant">🟡 SATISFAISANT</option>
+                                <option value="defaillant" class="condition-defaillant" selected>🔴 DÉFAILLANT</option>
+                                <option value="hors-service" class="condition-hors-service">⚫ HORS SERVICE</option>
+                            </select>
+                        </td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                    <tr>
+                        <td><span class="editable-cell" contenteditable="true">Tables d'opération</span></td>
+                        <td class="editable-cell" contenteditable="true">2</td>
+                        <td class="editable-cell" contenteditable="true">0</td>
+                        <td class="editable-cell" contenteditable="true">1</td>
+                        <td>
+                            <select class="condition-select condition-defaillant" onchange="updateConditionColor(this)">
+                                <option value="excellent" class="condition-excellent">🟢 EXCELLENT</option>
+                                <option value="bon" class="condition-bon">🔵 BON</option>
+                                <option value="satisfaisant" class="condition-satisfaisant">🟡 SATISFAISANT</option>
+                                <option value="defaillant" class="condition-defaillant" selected>🔴 DÉFAILLANT</option>
+                                <option value="hors-service" class="condition-hors-service">⚫ HORS SERVICE</option>
+                            </select>
+                        </td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <div class="status-warning">
             <strong>DEMANDES PRIORITAIRES AU QUARTIER-MAÎTRE:</strong><br>
@@ -689,185 +763,4 @@
         });
     </script>
 </body>
-</html>Row(this)">🗑️</button></td>
-                </tr>
-                <tr>
-                    <td><strong><span class="editable-cell" contenteditable="true">Plasma sanguin (unités)</span></strong></td>
-                    <td class="editable-cell" contenteditable="true">23</td>
-                    <td class="editable-cell" contenteditable="true">50</td>
-                    <td class="editable-cell" contenteditable="true">8</td>
-                    <td class="editable-cell" contenteditable="true">2.9 jours</td>
-                    <td>
-                        <select class="status-select status-critique" onchange="updateStatusColor(this)">
-                            <option value="bon" class="status-bon">🟢 BON</option>
-                            <option value="faible" class="status-faible">🟡 FAIBLE</option>
-                            <option value="urgent" class="status-urgent">🟠 URGENT</option>
-                            <option value="critique" class="status-critique" selected>🔴 CRITIQUE</option>
-                            <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
-                        </select>
-                    </td>
-                    <td class="editable-cell" contenteditable="true">Urgence absolue</td>
-                    <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
-                </tr>
-                <tr>
-                    <td><strong><span class="editable-cell" contenteditable="true">Pansements stériles</span></strong></td>
-                    <td class="editable-cell" contenteditable="true">156</td>
-                    <td class="editable-cell" contenteditable="true">200</td>
-                    <td class="editable-cell" contenteditable="true">25</td>
-                    <td class="editable-cell" contenteditable="true">6.2 jours</td>
-                    <td>
-                        <select class="status-select status-faible" onchange="updateStatusColor(this)">
-                            <option value="bon" class="status-bon">🟢 BON</option>
-                            <option value="faible" class="status-faible" selected>🟡 FAIBLE</option>
-                            <option value="urgent" class="status-urgent">🟠 URGENT</option>
-                            <option value="critique" class="status-critique">🔴 CRITIQUE</option>
-                            <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
-                        </select>
-                    </td>
-                    <td class="editable-cell" contenteditable="true">Réapprovisionnement requis</td>
-                    <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
-                </tr>
-                <tr>
-                    <td><strong><span class="editable-cell" contenteditable="true">Pénicilline (doses)</span></strong></td>
-                    <td class="editable-cell" contenteditable="true">89</td>
-                    <td class="editable-cell" contenteditable="true">75</td>
-                    <td class="editable-cell" contenteditable="true">12</td>
-                    <td class="editable-cell" contenteditable="true">7.4 jours</td>
-                    <td>
-                        <select class="status-select status-bon" onchange="updateStatusColor(this)">
-                            <option value="bon" class="status-bon" selected>🟢 BON</option>
-                            <option value="faible" class="status-faible">🟡 FAIBLE</option>
-                            <option value="urgent" class="status-urgent">🟠 URGENT</option>
-                            <option value="critique" class="status-critique">🔴 CRITIQUE</option>
-                            <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
-                        </select>
-                    </td>
-                    <td class="editable-cell" contenteditable="true">Stock satisfaisant</td>
-                    <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
-                </tr>
-                <tr>
-                    <td><strong><span class="editable-cell" contenteditable="true">Éther (bouteilles)</span></strong></td>
-                    <td class="editable-cell" contenteditable="true">3</td>
-                    <td class="editable-cell" contenteditable="true">10</td>
-                    <td class="editable-cell" contenteditable="true">2</td>
-                    <td class="editable-cell" contenteditable="true">1.5 jours</td>
-                    <td>
-                        <select class="status-select status-critique" onchange="updateStatusColor(this)">
-                            <option value="bon" class="status-bon">🟢 BON</option>
-                            <option value="faible" class="status-faible">🟡 FAIBLE</option>
-                            <option value="urgent" class="status-urgent">🟠 URGENT</option>
-                            <option value="critique" class="status-critique" selected>🔴 CRITIQUE</option>
-                            <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
-                        </select>
-                    </td>
-                    <td class="editable-cell" contenteditable="true">Chirurgies limitées</td>
-                    <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
-                </tr>
-                <tr>
-                    <td><strong><span class="editable-cell" contenteditable="true">Sulfa (comprimés)</span></strong></td>
-                    <td class="editable-cell" contenteditable="true">234</td>
-                    <td class="editable-cell" contenteditable="true">150</td>
-                    <td class="editable-cell" contenteditable="true">18</td>
-                    <td class="editable-cell" contenteditable="true">13 jours</td>
-                    <td>
-                        <select class="status-select status-bon" onchange="updateStatusColor(this)">
-                            <option value="bon" class="status-bon" selected>🟢 BON</option>
-                            <option value="faible" class="status-faible">🟡 FAIBLE</option>
-                            <option value="urgent" class="status-urgent">🟠 URGENT</option>
-                            <option value="critique" class="status-critique">🔴 CRITIQUE</option>
-                            <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
-                        </select>
-                    </td>
-                    <td class="editable-cell" contenteditable="true">-</td>
-                    <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="status-critical">
-            <strong>🚨 ALERTES CRITIQUES:</strong><br>
-            <textarea class="editable" id="critical-alerts" placeholder="Alertes critiques...">• MORPHINE: Stock critique - 3 jours d'autonomie
-• PLASMA: Épuisement imminent - patients hémorragiques en danger
-• ÉTHER: Interventions chirurgicales suspendues dès demain
-• Demande de réapprovisionnement d'urgence transmise</textarea>
-        </div>
-
-        <div style="margin: 25px 0;">
-            <strong>ÉQUIPEMENT CHIRURGICAL:</strong>
-        </div>
-
-        <table class="table" id="equipmentTable">
-            <thead>
-                <tr>
-                    <th>INSTRUMENT</th>
-                    <th>DISPONIBLE</th>
-                    <th>EN RÉPARATION</th>
-                    <th>PERDU/DÉTRUIT</th>
-                    <th>ÉTAT GÉNÉRAL</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="editable-cell" contenteditable="true">Scalpels</span></td>
-                    <td class="editable-cell" contenteditable="true">12</td>
-                    <td class="editable-cell" contenteditable="true">2</td>
-                    <td class="editable-cell" contenteditable="true">3</td>
-                    <td>
-                        <select class="condition-select condition-satisfaisant" onchange="updateConditionColor(this)">
-                            <option value="excellent" class="condition-excellent">🟢 EXCELLENT</option>
-                            <option value="bon" class="condition-bon">🔵 BON</option>
-                            <option value="satisfaisant" class="condition-satisfaisant" selected>🟡 SATISFAISANT</option>
-                            <option value="defaillant" class="condition-defaillant">🔴 DÉFAILLANT</option>
-                            <option value="hors-service" class="condition-hors-service">⚫ HORS SERVICE</option>
-                        </select>
-                    </td>
-                    <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
-                </tr>
-                <tr>
-                    <td><span class="editable-cell" contenteditable="true">Pinces hémostatiques</span></td>
-                    <td class="editable-cell" contenteditable="true">18</td>
-                    <td class="editable-cell" contenteditable="true">1</td>
-                    <td class="editable-cell" contenteditable="true">5</td>
-                    <td>
-                        <select class="condition-select condition-bon" onchange="updateConditionColor(this)">
-                            <option value="excellent" class="condition-excellent">🟢 EXCELLENT</option>
-                            <option value="bon" class="condition-bon" selected>🔵 BON</option>
-                            <option value="satisfaisant" class="condition-satisfaisant">🟡 SATISFAISANT</option>
-                            <option value="defaillant" class="condition-defaillant">🔴 DÉFAILLANT</option>
-                            <option value="hors-service" class="condition-hors-service">⚫ HORS SERVICE</option>
-                        </select>
-                    </td>
-                    <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
-                </tr>
-                <tr>
-                    <td><span class="editable-cell" contenteditable="true">Stéthoscopes</span></td>
-                    <td class="editable-cell" contenteditable="true">4</td>
-                    <td class="editable-cell" contenteditable="true">1</td>
-                    <td class="editable-cell" contenteditable="true">1</td>
-                    <td>
-                        <select class="condition-select condition-defaillant" onchange="updateConditionColor(this)">
-                            <option value="excellent" class="condition-excellent">🟢 EXCELLENT</option>
-                            <option value="bon" class="condition-bon">🔵 BON</option>
-                            <option value="satisfaisant" class="condition-satisfaisant">🟡 SATISFAISANT</option>
-                            <option value="defaillant" class="condition-defaillant" selected>🔴 DÉFAILLANT</option>
-                            <option value="hors-service" class="condition-hors-service">⚫ HORS SERVICE</option>
-                        </select>
-                    </td>
-                    <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
-                </tr>
-                <tr>
-                    <td><span class="editable-cell" contenteditable="true">Tables d'opération</span></td>
-                    <td class="editable-cell" contenteditable="true">2</td>
-                    <td class="editable-cell" contenteditable="true">0</td>
-                    <td class="editable-cell" contenteditable="true">1</td>
-                    <td>
-                        <select class="condition-select condition-defaillant" onchange="updateConditionColor(this)">
-                            <option value="excellent" class="condition-excellent">🟢 EXCELLENT</option>
-                            <option value="bon" class="condition-bon">🔵 BON</option>
-                            <option value="satisfaisant" class="condition-satisfaisant">🟡 SATISFAISANT</option>
-                            <option value="defaillant" class="condition-defaillant" selected>🔴 DÉFAILLANT</option>
-                            <option value="hors-service" class="condition-hors-service">⚫ HORS SERVICE</option>
-                        </select>
-                    </td>
-                    <td><button class="delete-btn" onclick="delete
+</html>
