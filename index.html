@@ -511,6 +511,186 @@
                     <td class="editable-cell" contenteditable="true">Rationnement en cours</td>
                     <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
                 </tr>
+            </tbody>
+        </table>
+
+        <div class="status-warning">
+            <strong>DEMANDES PRIORITAIRES AU QUARTIER-MAÎTRE:</strong><br>
+            <textarea class="editable" id="supply-requests" placeholder="Demandes d'approvisionnement...">1. URGENT: 200 ampoules morphine + 100 unités plasma
+2. PRIORITÉ: 15 bouteilles éther pour anesthésie
+3. NÉCESSAIRE: 500 pansements stériles assortis
+4. SOUHAITABLE: 2 stéthoscopes de remplacement
+5. CRITIQUE: Table d'opération portative supplémentaire</textarea>
+        </div>
+
+        <div class="signature-area">
+            <div>
+                <strong>Officier Responsable:</strong><br>
+                <div class="signature-box"></div>
+                <strong><span class="editable" contenteditable="true">2nd Lieutenant Peter J. Parsons</span></strong><br>
+                Medical Officer, 88th Régiment Médical
+            </div>
+            <div>
+                <strong>Prochain Inventaire:</strong><br>
+                <span class="editable" contenteditable="true">08 July 1944</span><br>
+                <strong>Fréquence:</strong> Quotidienne
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateStatusColor(select) {
+            select.className = 'status-select status-' + select.value;
+        }
+
+        function updateConditionColor(select) {
+            select.className = 'condition-select condition-' + select.value;
+        }
+
+        function deleteRow(button) {
+            if (confirm('Supprimer cette ligne ?')) {
+                button.closest('tr').remove();
+            }
+        }
+
+        function addInventoryRow() {
+            const table = document.getElementById('inventoryTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            
+            newRow.innerHTML = `
+                <td><strong><span class="editable-cell" contenteditable="true">Nouveau matériel</span></strong></td>
+                <td class="editable-cell" contenteditable="true">0</td>
+                <td class="editable-cell" contenteditable="true">0</td>
+                <td class="editable-cell" contenteditable="true">0</td>
+                <td class="editable-cell" contenteditable="true">0 jours</td>
+                <td>
+                    <select class="status-select status-bon" onchange="updateStatusColor(this)">
+                        <option value="bon" class="status-bon" selected>🟢 BON</option>
+                        <option value="faible" class="status-faible">🟡 FAIBLE</option>
+                        <option value="urgent" class="status-urgent">🟠 URGENT</option>
+                        <option value="critique" class="status-critique">🔴 CRITIQUE</option>
+                        <option value="rupture" class="status-rupture">⚫ RUPTURE</option>
+                    </select>
+                </td>
+                <td class="editable-cell" contenteditable="true">-</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+            `;
+        }
+
+        function addEquipmentRow() {
+            const table = document.getElementById('equipmentTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            
+            newRow.innerHTML = `
+                <td><span class="editable-cell" contenteditable="true">Nouvel équipement</span></td>
+                <td class="editable-cell" contenteditable="true">0</td>
+                <td class="editable-cell" contenteditable="true">0</td>
+                <td class="editable-cell" contenteditable="true">0</td>
+                <td>
+                    <select class="condition-select condition-excellent" onchange="updateConditionColor(this)">
+                        <option value="excellent" class="condition-excellent" selected>🟢 EXCELLENT</option>
+                        <option value="bon" class="condition-bon">🔵 BON</option>
+                        <option value="satisfaisant" class="condition-satisfaisant">🟡 SATISFAISANT</option>
+                        <option value="defaillant" class="condition-defaillant">🔴 DÉFAILLANT</option>
+                        <option value="hors-service" class="condition-hors-service">⚫ HORS SERVICE</option>
+                    </select>
+                </td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+            `;
+        }
+
+        function printToPDF() {
+            window.print();
+        }
+
+        function resetAll() {
+            if (confirm('⚠️ Attention ! Cette action va effacer TOUT le contenu des cases modifiables.\n\nÊtes-vous sûr de vouloir continuer ?')) {
+                // Reset tous les champs éditables
+                const editableCells = document.querySelectorAll('.editable-cell[contenteditable="true"]');
+                editableCells.forEach(cell => {
+                    cell.textContent = '';
+                });
+
+                // Reset tous les champs de formulaire
+                const formFields = document.querySelectorAll('.form-field[contenteditable="true"]');
+                formFields.forEach(field => {
+                    field.textContent = '';
+                });
+
+                // Reset tous les éléments éditables
+                const editables = document.querySelectorAll('.editable[contenteditable="true"]');
+                editables.forEach(editable => {
+                    if (editable.tagName === 'TEXTAREA') {
+                        editable.value = '';
+                    } else {
+                        editable.textContent = '';
+                    }
+                });
+
+                // Reset tous les textareas
+                const textareas = document.querySelectorAll('textarea.editable');
+                textareas.forEach(textarea => {
+                    textarea.value = '';
+                });
+
+                // Reset tous les selects aux valeurs par défaut
+                const statusSelects = document.querySelectorAll('.status-select');
+                statusSelects.forEach(select => {
+                    select.value = 'bon';
+                    select.className = 'status-select status-bon';
+                });
+
+                const conditionSelects = document.querySelectorAll('.condition-select');
+                conditionSelects.forEach(select => {
+                    select.value = 'excellent';
+                    select.className = 'condition-select condition-excellent';
+                });
+
+                alert('✅ Reset effectué ! Tous les champs ont été vidés.');
+            }
+        }
+
+        // Auto-save dans le localStorage (optionnel)
+        function autoSave() {
+            const editableElements = document.querySelectorAll('[contenteditable="true"], textarea.editable, select');
+            editableElements.forEach((element, index) => {
+                element.addEventListener('input', function() {
+                    localStorage.setItem('medical_inventory_' + index, this.value || this.textContent);
+                });
+            });
+        }
+
+        // Charger les données sauvegardées (optionnel)
+        function loadSaved() {
+            const editableElements = document.querySelectorAll('[contenteditable="true"], textarea.editable, select');
+            editableElements.forEach((element, index) => {
+                const saved = localStorage.getItem('medical_inventory_' + index);
+                if (saved) {
+                    if (element.tagName === 'SELECT') {
+                        element.value = saved;
+                        if (element.classList.contains('status-select')) {
+                            updateStatusColor(element);
+                        } else if (element.classList.contains('condition-select')) {
+                            updateConditionColor(element);
+                        }
+                    } else if (element.tagName === 'TEXTAREA') {
+                        element.value = saved;
+                    } else {
+                        element.textContent = saved;
+                    }
+                }
+            });
+        }
+
+        // Initialiser au chargement
+        window.addEventListener('load', function() {
+            // autoSave(); // Décommenter pour activer la sauvegarde auto
+            // loadSaved(); // Décommenter pour charger les données sauvegardées
+        });
+    </script>
+</body>
+</html>Row(this)">🗑️</button></td>
+                </tr>
                 <tr>
                     <td><strong><span class="editable-cell" contenteditable="true">Plasma sanguin (unités)</span></strong></td>
                     <td class="editable-cell" contenteditable="true">23</td>
