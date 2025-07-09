@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>INVENTAIRE MÉDICAL - 88th Régiment Médical</title>
+    <title>INVENTAIRE MÉDICAL - 88ème Régiment Médical</title>
     <style>
         
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
@@ -295,7 +295,6 @@
         }
         
         @media print {
-            /* Masquer seulement les contrôles, garder tout le reste identique */
             .controls {
                 display: none !important;
             }
@@ -312,7 +311,6 @@
                 display: none !important;
             }
             
-            /* Juste ajuster la taille pour A4 */
             @page {
                 size: A4;
                 margin: 15mm;
@@ -335,33 +333,33 @@
 <body>
     <div class="controls">
         <h3>🔧 Outils de gestion</h3>
-        <button class="print-btn" onclick="printToPDF()">📄 PDF</button>
-        <button class="add-row-btn" onclick="addInventoryRow()">➕ Matériel</button>
-        <button class="add-row-btn" onclick="addEquipmentRow()">➕ Équipement</button>
-        <button class="reset-btn" onclick="resetAll()">🔄 Reset</button>
+        <button class="print-btn" onclick="printToPDF()">📄 Imprimer PDF</button>
+        <button class="add-row-btn" onclick="addInventoryRow()">➕ Ajouter Matériel</button>
+        <button class="add-row-btn" onclick="addEquipmentRow()">➕ Ajouter Équipement</button>
+        <button class="reset-btn" onclick="resetAll()">🔄 Réinitialiser</button>
     </div>
 
     <div class="document" id="inventory">
         <div class="header">
             <div class="medical-seal">📦</div>
             <div class="title">INVENTAIRE MÉDICAL</div>
-            <div class="subtitle">88th Régiment Médical</div>
-            <div class="subtitle">Medical Supply Status Report</div>
-            <div class="medical-emblem">⚕️ 88th RÉGIMENT MÉDICAL ⚕️</div>
+            <div class="subtitle">88ème Régiment Médical</div>
+            <div class="subtitle">Rapport d'État des Fournitures Médicales</div>
+            <div class="medical-emblem">⚕️ 88ème RÉGIMENT MÉDICAL ⚕️</div>
         </div>
 
         <div class="form-row">
-            <strong>Date d'Inventaire:</strong> 
-            <span class="form-field" contenteditable="true" id="inv-date">7 July 1944</span>
-            <strong>Heure:</strong> 
-            <span class="form-field" contenteditable="true" id="inv-time">2300 Hours</span>
-            <strong>Responsable:</strong> 
-            <span class="form-field" contenteditable="true" id="inv-officer">2nd Lieutenant P.J. Parsons</span>
+            <strong>Date d'Inventaire :</strong> 
+            <span class="form-field" contenteditable="true" id="inv-date">7 juillet 1944</span>
+            <strong>Heure :</strong> 
+            <span class="form-field" contenteditable="true" id="inv-time">23h00</span>
+            <strong>Responsable :</strong> 
+            <span class="form-field" contenteditable="true" id="inv-officer">2ème Lieutenant P.J. Parsons</span>
         </div>
 
         <div class="form-row">
-            <strong>Localisation:</strong> 
-            <span class="form-field" contenteditable="true" id="inv-location">Base Medical Depot</span>
+            <strong>Localisation :</strong> 
+            <span class="form-field" contenteditable="true" id="inv-location">Dépôt Médical de Base</span>
         </div>
 
         <div class="medical-priority">
@@ -375,7 +373,7 @@
                         <th>MATÉRIEL MÉDICAL</th>
                         <th>STOCK ACTUEL</th>
                         <th>STOCK MINIMUM</th>
-                        <th>CONSO/J</th>
+                        <th>CONSO/JOUR</th>
                         <th>AUTONOMIE</th>
                         <th>STATUT</th>
                         <th>OBSERVATIONS</th>
@@ -388,7 +386,7 @@
                         <td class="editable-cell" contenteditable="true">47</td>
                         <td class="editable-cell" contenteditable="true">100</td>
                         <td class="editable-cell" contenteditable="true">15</td>
-                        <td class="editable-cell" contenteditable="true">3.1 jours</td>
+                        <td class="editable-cell" contenteditable="true">3,1 jours</td>
                         <td>
                             <select class="status-select status-critique" onchange="updateStatusColor(this)">
                                 <option value="bon" class="status-bon">🟢 BON</option>
@@ -406,7 +404,7 @@
                         <td class="editable-cell" contenteditable="true">23</td>
                         <td class="editable-cell" contenteditable="true">50</td>
                         <td class="editable-cell" contenteditable="true">8</td>
-                        <td class="editable-cell" contenteditable="true">2.9 jours</td>
+                        <td class="editable-cell" contenteditable="true">2,9 jours</td>
                         <td>
                             <select class="status-select status-critique" onchange="updateStatusColor(this)">
                                 <option value="bon" class="status-bon">🟢 BON</option>
@@ -424,7 +422,7 @@
                         <td class="editable-cell" contenteditable="true">156</td>
                         <td class="editable-cell" contenteditable="true">200</td>
                         <td class="editable-cell" contenteditable="true">25</td>
-                        <td class="editable-cell" contenteditable="true">6.2 jours</td>
+                        <td class="editable-cell" contenteditable="true">6,2 jours</td>
                         <td>
                             <select class="status-select status-faible" onchange="updateStatusColor(this)">
                                 <option value="bon" class="status-bon">🟢 BON</option>
@@ -442,7 +440,7 @@
                         <td class="editable-cell" contenteditable="true">89</td>
                         <td class="editable-cell" contenteditable="true">75</td>
                         <td class="editable-cell" contenteditable="true">12</td>
-                        <td class="editable-cell" contenteditable="true">7.4 jours</td>
+                        <td class="editable-cell" contenteditable="true">7,4 jours</td>
                         <td>
                             <select class="status-select status-bon" onchange="updateStatusColor(this)">
                                 <option value="bon" class="status-bon" selected>🟢 BON</option>
@@ -460,7 +458,7 @@
                         <td class="editable-cell" contenteditable="true">3</td>
                         <td class="editable-cell" contenteditable="true">10</td>
                         <td class="editable-cell" contenteditable="true">2</td>
-                        <td class="editable-cell" contenteditable="true">1.5 jours</td>
+                        <td class="editable-cell" contenteditable="true">1,5 jours</td>
                         <td>
                             <select class="status-select status-critique" onchange="updateStatusColor(this)">
                                 <option value="bon" class="status-bon">🟢 BON</option>
@@ -496,15 +494,15 @@
         </div>
 
         <div class="status-critical">
-            <strong>🚨 ALERTES CRITIQUES:</strong><br>
-            <textarea class="editable" id="critical-alerts" placeholder="Alertes critiques...">• MORPHINE: Stock critique - 3 jours d'autonomie
-• PLASMA: Épuisement imminent - patients hémorragiques en danger
-• ÉTHER: Interventions chirurgicales suspendues dès demain
+            <strong>🚨 ALERTES CRITIQUES :</strong><br>
+            <textarea class="editable" id="critical-alerts" placeholder="Alertes critiques...">• MORPHINE : Stock critique - 3 jours d'autonomie
+• PLASMA : Épuisement imminent - patients hémorragiques en danger
+• ÉTHER : Interventions chirurgicales suspendues dès demain
 • Demande de réapprovisionnement d'urgence transmise</textarea>
         </div>
 
         <div style="margin: 25px 0;">
-            <strong>ÉQUIPEMENT CHIRURGICAL:</strong>
+            <strong>ÉQUIPEMENT CHIRURGICAL :</strong>
         </div>
 
         <div class="table-container">
@@ -589,25 +587,25 @@
         </div>
 
         <div class="status-warning">
-            <strong>DEMANDES PRIORITAIRES AU QUARTIER-MAÎTRE:</strong><br>
-            <textarea class="editable" id="supply-requests" placeholder="Demandes d'approvisionnement...">1. URGENT: 200 ampoules morphine + 100 unités plasma
-2. PRIORITÉ: 15 bouteilles éther pour anesthésie
-3. NÉCESSAIRE: 500 pansements stériles assortis
-4. SOUHAITABLE: 2 stéthoscopes de remplacement
-5. CRITIQUE: Table d'opération portative supplémentaire</textarea>
+            <strong>DEMANDES PRIORITAIRES AU QUARTIER-MAÎTRE :</strong><br>
+            <textarea class="editable" id="supply-requests" placeholder="Demandes d'approvisionnement...">1. URGENT : 200 ampoules morphine + 100 unités plasma
+2. PRIORITÉ : 15 bouteilles éther pour anesthésie
+3. NÉCESSAIRE : 500 pansements stériles assortis
+4. SOUHAITABLE : 2 stéthoscopes de remplacement
+5. CRITIQUE : Table d'opération portative supplémentaire</textarea>
         </div>
 
         <div class="signature-area">
             <div>
-                <strong>Officier Responsable:</strong><br>
+                <strong>Officier Responsable :</strong><br>
                 <div class="signature-box"></div>
-                <strong><span class="editable" contenteditable="true">2nd Lieutenant Peter J. Parsons</span></strong><br>
-                Medical Officer, 88th Régiment Médical
+                <strong><span class="editable" contenteditable="true">2ème Lieutenant Pierre J. Parsons</span></strong><br>
+                Officier Médical, 88ème Régiment Médical
             </div>
             <div>
-                <strong>Prochain Inventaire:</strong><br>
-                <span class="editable" contenteditable="true">08 July 1944</span><br>
-                <strong>Fréquence:</strong> Quotidienne
+                <strong>Prochain Inventaire :</strong><br>
+                <span class="editable" contenteditable="true">8 juillet 1944</span><br>
+                <strong>Fréquence :</strong> Quotidienne
             </div>
         </div>
     </div>
@@ -720,16 +718,16 @@
                     select.className = 'condition-select condition-excellent';
                 });
 
-                alert('✅ Reset effectué ! Tous les champs ont été vidés.');
+                alert('✅ Réinitialisation effectuée ! Tous les champs ont été vidés.');
             }
         }
 
-        // Auto-save dans le localStorage (optionnel)
+        // Auto-sauvegarde dans le localStorage (optionnel)
         function autoSave() {
             const editableElements = document.querySelectorAll('[contenteditable="true"], textarea.editable, select');
             editableElements.forEach((element, index) => {
                 element.addEventListener('input', function() {
-                    localStorage.setItem('medical_inventory_' + index, this.value || this.textContent);
+                    localStorage.setItem('inventaire_medical_' + index, this.value || this.textContent);
                 });
             });
         }
@@ -738,7 +736,7 @@
         function loadSaved() {
             const editableElements = document.querySelectorAll('[contenteditable="true"], textarea.editable, select');
             editableElements.forEach((element, index) => {
-                const saved = localStorage.getItem('medical_inventory_' + index);
+                const saved = localStorage.getItem('inventaire_medical_' + index);
                 if (saved) {
                     if (element.tagName === 'SELECT') {
                         element.value = saved;
@@ -758,7 +756,7 @@
 
         // Initialiser au chargement
         window.addEventListener('load', function() {
-            // autoSave(); // Décommenter pour activer la sauvegarde auto
+            // autoSave(); // Décommenter pour activer la sauvegarde automatique
             // loadSaved(); // Décommenter pour charger les données sauvegardées
         });
     </script>
